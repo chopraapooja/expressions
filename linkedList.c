@@ -6,7 +6,7 @@
 void printList(LinkedList list) {
 	Node *this = (list.head);
 	while(this){
-		printf("\"%s\", ", (char*)(this->data));
+		printf("\"%s\", ", (this->data));
 		this = this->next;
 	}
 }
@@ -136,4 +136,3 @@ LinkedList* filter(LinkedList list, Predicate predicate) {
 	}
 	return filteredList;
 }
-

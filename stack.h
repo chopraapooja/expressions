@@ -1,13 +1,13 @@
 typedef struct Stack Stack;
-typedef struct Node Node;
+typedef struct S_Node S_Node;
 
-struct Node{
+struct S_Node{
 	void *data;
-	Node *back;
+	S_Node *back;
 };
 
 struct Stack {
-	Node* top;
+	S_Node* top;
 	int height;
 };
 
@@ -15,3 +15,4 @@ Stack createStack(void);
 int push(Stack*, void *);
 void * pop(Stack *);
 void printStack(Stack stack);
+S_Node* createNode(void *data);
