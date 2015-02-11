@@ -130,11 +130,11 @@ void test_ListToString_BUG1() {
 	assert(strcmp(listToString(names), "2 3 + 4 +") == 0);
 }
 
-// void test_ListToString_should_give_null_on_providing_empty_list() {
-// 	LinkedList names = createList();
-// 	printf("\n");
-// 	assert(listToString(names) == NULL);
-// }
+void test_ListToString_should_give_null_on_providing_empty_list() {
+	LinkedList names = createList();
+	printf("\n %d", names.head);
+	assert(listToString(names) == NULL);
+}
 
 void test_infixToPostfix_should_convert_2_plus_3_to_2_3_plus() {
 	String infix = "2 +   3";

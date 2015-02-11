@@ -59,13 +59,13 @@ char* strcpyheap(char *dest) {
 } 
 
 char* listToString(LinkedList list) {
-	Node *this = (list.head)->next;
+	Node *this;
 	char *string;
 	int bytes;
 	
-
-	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ %p\n" ,list.head);
+	
 	if(!list.head) return NULL;
+	this = (list.head)->next;
 	string = strcpyheap(list.head->data);
 
 	while(this){
@@ -75,7 +75,6 @@ char* listToString(LinkedList list) {
 		strcat(string, this->data);
 		this = this->next;
 	}
-	// if (string)string[strlen(string) -1] = NULL;
 	return string;
 }
 
