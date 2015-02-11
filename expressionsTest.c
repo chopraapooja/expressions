@@ -143,10 +143,10 @@ void test_infixToPostfix_should_handle_expressions_having_multiple_braces() {
 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
 }
 
-// void test_infixToPostfix_special_cases() {
-// 	String infix1 = "(((2+3+4)))"; 
-// 	String infix2 = "2+3+4";
-// 	String postfix = "2 3 + 4 +";
-// 	assert(strcmp(infixToPostfix(infix1), postfix) == 0); 
-// 	// assert(strcmp(infixToPostfix(infix2), postfix) == 0); 
-// }
+void test_infixToPostfix_special_cases() {
+	String infix1 = "(((2+3+4)))"; 
+	String infix2 = "2+3+4";
+	String postfix = "2 3 + 4 +";
+	assert(strcmp(infixToPostfix(infix1), postfix) == 0); 
+	// assert(strcmp(infixToPostfix(infix2), postfix) == 0); 
+}
