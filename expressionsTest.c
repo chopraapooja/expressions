@@ -120,12 +120,23 @@ void test_ListToString_should_convert_list_of_strings_into_single_string() {
 	assert(strcmp(listToString(names), "Pooja Gagan Neha") == 0);
 }
 
-void test_ListToString_should_give_null_on_providing_empty_list() {
+void test_ListToString_BUG1() {
 	LinkedList names = createList();
-	assert(listToString(names) == NULL);
+	_add_to_list(&names, "2");
+	_add_to_list(&names, "3");
+	_add_to_list(&names, "+");
+	_add_to_list(&names, "4");
+	_add_to_list(&names, "+");
+	assert(strcmp(listToString(names), "2 3 + 4 +") == 0);
 }
 
-void test_infixToPostfix_should_convert_2_3_plus_to_2_plus_3() {
+// void test_ListToString_should_give_null_on_providing_empty_list() {
+// 	LinkedList names = createList();
+// 	printf("\n");
+// 	assert(listToString(names) == NULL);
+// }
+
+void test_infixToPostfix_should_convert_2_plus_3_to_2_3_plus() {
 	String infix = "2 +   3";
 	String postfix = "2 3 +";
 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
@@ -143,10 +154,23 @@ void test_infixToPostfix_should_handle_expressions_having_multiple_braces() {
 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
 }
 
-// void test_infixToPostfix_special_cases() {
-// 	String infix1 = "(((2+3+4)))"; 
-// 	String infix2 = "2+3+4";
-// 	String postfix = "2 3 + 4 +";
-// 	assert(strcmp(infixToPostfix(infix1), postfix) == 0); 
-// 	// assert(strcmp(infixToPostfix(infix2), postfix) == 0); 
-// }
+void test_isBraces_should_return_1_on_opening_bracet_and_2_for_closing_bracket() {
+	String open = "(", close = ")";
+	assert(isBraces(open) == 1);
+	assert(isBraces(close) == 2);
+}
+
+void test_isBraces_should_return_0_when_string_is_not_braces() {
+	String open = "(hfajh", close = "a";
+	assert(isBraces(open) == 0);
+	assert(isBraces(close) == 0);
+}
+
+void test_infixToPostfix_special_cases() {
+	String infix1 = "(((2+3+4)))"; 
+	String infix2 = "2+3+4";
+	String postfix = "2 3 + 4 +";
+	printf("--------------------==========%s\n", infixToPostfix(infix1));
+	assert(strcmp(infixToPostfix(infix1), postfix) == 0); 
+	// assert(strcmp(infixToPostfix(infix2), postfix) == 0); 
+}

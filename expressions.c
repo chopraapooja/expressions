@@ -52,19 +52,55 @@ int precedence(char* operator) {
  	}
 }
 
+char* strcpyheap(char *dest) {
+	char *source = malloc(strlen(dest));
+	strcpy(source, dest);
+	return source;
+} 
+
 char* listToString(LinkedList list) {
-	Node *this = (list.head);
-	char *string = NULL;
+	Node *this = (list.head)->next;
+	char *string;
 	int bytes;
+	
+
+	printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ %p\n" ,list.head);
+	if(!list.head) return NULL;
+	string = strcpyheap(list.head->data);
+
 	while(this){
-		bytes = string ? strlen(this->data) + strlen(string) : strlen(this->data);
+		bytes = strlen(this->data) + strlen(string);
 		string = realloc(string, bytes);
-		strcat(string, this->data);
 		strcat(string, " ");
+		strcat(string, this->data);
 		this = this->next;
 	}
-	if (string)string[strlen(string) -1] = NULL;
+	// if (string)string[strlen(string) -1] = NULL;
 	return string;
+}
+
+int isBraces(char* token){
+	if(!strcmp(token, "(")) return 1;  
+	if(!strcmp(token, ")")) return 2;  
+	return 0;
+}
+
+void* getTop(Stack* stack) {
+	return stack->top ? (stack->top->data) : NULL;
+}
+
+void handleOperator(char* operator, Stack* stack, LinkedList *list) {
+	char *top,*temp;
+	top = getTop(stack); 
+	while((precedence(operator) <= precedence(top))){
+		printf("precedence Locha = %s, top=%s\n", operator,top);
+		temp = pop(stack); 
+		_add_to_list(list, temp);
+		printf("Just add %s\n", temp);
+		top = getTop(stack);
+	}
+	printf("Hey I am gonna to pushhhhhhhhhhhhhhhhh %s stackTOP = %s\n", operator, top);
+	push(stack, operator);	
 }
 
 char* infixToPostfix(char *expression) {
@@ -75,30 +111,36 @@ char* infixToPostfix(char *expression) {
 	
 	while(this) {
 		token = (char*)this->data;
-		top = stack.top ? (char*)(stack.top->data) : NULL; 
+		top = getTop(&stack);
 
 		if(isSpecialSymbol(*token)) {
-			while(precedence(token) < precedence(top)) {
-				printf("precedence Locha = %s\n", token);
-				temp = pop(&stack); 
-				if(temp[0] != '(' && temp[0] != ')'){
+			if(isBraces(token) == 1){
+				printf("Hey I am gonna to pushhhhhhhhhhhhhhhhh %s stackTOP = %s\n", token, top);
+				push(&stack, token);
+			}
+			else if(isBraces(token) == 2) {
+				while(isBraces(top) != 1) { 
+					printf("POPing = %s\n",top); 
+					temp = pop(&stack); 
 					printf("Just add %s\n", temp);
 					_add_to_list(&result, temp);
-				} 
-					
-				top = stack.top ? (char*)(stack.top->data) : NULL; 
+					top = getTop(&stack); 
+				}
+				pop(&stack);	top = getTop(&stack);
+			}			
+			else {
+				handleOperator(token, &stack, &result);
 			}
-			if(token[0] != ')'){
-				printf("Hey I am gonna to pushhhhhhhhhhhhhhhhh %s stackTOP = %s\n", token, top);
-				push(&stack, token);	
-			} 
-		} else {
+ 		} 
+		else {
 			printf("Just add %s\n", token);
 			_add_to_list(&result, token);
 		}	
 		this = this->next;
 	}
-	stack.top ? emptyStack(&stack, &result) : "Pooja";
+	printList(result);	
+	printf("******************** top %s\n", top);
+	emptyStack(&stack, &result);
 	return listToString(result);
 }
 
