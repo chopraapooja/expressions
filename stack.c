@@ -14,7 +14,7 @@ S_Node* createNode(void *data) {
 }
 
 int push(Stack *stack, void *element) {
-	S_Node *node = create_node(element, 2);
+	S_Node *node = createNode(element);
 	node->back = stack->top;
 	stack->top = node;
 	return ++(stack->height);

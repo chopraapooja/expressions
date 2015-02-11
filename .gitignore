@@ -3,4 +3,4 @@
 *.exe.core
 spike.c
 spike0.c
-*TestRunner.c
+
