@@ -9,6 +9,7 @@ void test_isSpecialSymbol_should_return_1_if_given_symbol_is_specailSymbol() {
 	assert(isSpecialSymbol('+') == 1);
 	assert(isSpecialSymbol('^') == 1);
 }
+
 void test_isSpecialSymbol_should_return_0_if_given_symbol_is_NOT_specailSymbol() {
 	assert(isSpecialSymbol('NULL') == 0);
 	assert(isSpecialSymbol('1') == 0);
@@ -124,23 +125,23 @@ void test_ListToString_should_give_null_on_providing_empty_list() {
 	assert(listToString(names) == NULL);
 }
 
-// void test_infixToPostfix_should_convert_2_3_plus_to_2_plus_3() {
-// 	String infix = "2 +   3";
-// 	String postfix = "2 3 +";
-// 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
-// }
+void test_infixToPostfix_should_convert_2_3_plus_to_2_plus_3() {
+	String infix = "2 +   3";
+	String postfix = "2 3 +";
+	assert(strcmp(infixToPostfix(infix), postfix) == 0);
+}
 
-// void test_infixToPostfix_should_convert_infixExpr_to_postfixExpr() {
-// 	String infix = "(2+3)*14-2";
-// 	String postfix = "2 3 + 14 * 2 -";
-// 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
-// }
+void test_infixToPostfix_should_convert_infixExpr_to_postfixExpr() {
+	String infix = "(2+3)*14-2";
+	String postfix = "2 3 + 14 * 2 -";
+	assert(strcmp(infixToPostfix(infix), postfix) == 0);
+}
 
-// void test_infixToPostfix_should_handle_expressions_having_multiple_braces() {
-// 	String infix = "((2+3)*5)/7^3";
-// 	String postfix = "2 3 + 5 * 7 3 ^ /";
-// 	assert(strcmp(infixToPostfix(infix), postfix) == 0);
-// }
+void test_infixToPostfix_should_handle_expressions_having_multiple_braces() {
+	String infix = "((2+3)*5)/7^3";
+	String postfix = "2 3 + 5 * 7 3 ^ /";
+	assert(strcmp(infixToPostfix(infix), postfix) == 0);
+}
 
 // void test_infixToPostfix_special_cases() {
 // 	String infix1 = "(((2+3+4)))"; 
